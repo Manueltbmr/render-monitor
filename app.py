@@ -1,3 +1,4 @@
+import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 class Handler(BaseHTTPRequestHandler):
@@ -6,4 +7,6 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"OK")
 
-HTTPServer(("0.0.0.0", 10000), Handler).serve_forever()
+port = int(os.environ.get("PORT", 10000))
+
+HTTPServer(("0.0.0.0", port), Handler).serve_forever()
